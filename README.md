@@ -8,7 +8,6 @@ Your solution must:
 
 - Handle unclean product names by cleaning and normalizing inputs.
 - Accurately match to the closest dataset product.
-- Keep average response time **below 10 seconds per product**.
 - Be well-documented, modular, and scalable.
 
 ---
@@ -42,7 +41,7 @@ You will build a system with the following capabilities:
         - `input_product`: original product name from the input
         - `matched_product`: closest matched product name from the dataset
         - `carbon_rating`: carbon rating of the matched product
-4. The response time for matching each product should not exceed 10 seconds.
+4. The response time for matching each product should be fast.
 
 ---
 
@@ -101,14 +100,13 @@ input_product,matched_product,carbon_rating
 2. The script will print metrics such as:
     - **Accuracy score**: percentage of exact matches with the ground truth.
     - **Average latency**: average time taken to match each product.
-3. Your submission should aim for high accuracy while ensuring average response time per product stays below the 10-second limit.
+3. Your submission should aim for high accuracy while ensuring average response time is fast.
 
 ---
 
 ### Considerations
 
 1. **Input Cleaning :** The input names can be unclean with brand names or product quantities. Your system **must** handle noisy product names (e.g., brands, volumes) through text cleaning or normalization before matching.
-2. **Time Limit:** Submissions exceeding an average of 10 seconds per product will be considered incomplete.
 
 ---
 
@@ -146,7 +144,7 @@ Please send an email with your GitHub repository and your resume to **rithin.cha
 ### Evaluation Criteria
 
 - **Accuracy:** How closely does the system’s `matched_product` align with the expected matches in `truth.csv`?
-- **Latency:** What is the average time taken to process each product name? Submissions should keep it under 10 seconds per product.
+- **Latency:** What is the average time taken to process each product name? Submissions should keep response time fast.
 - **Scalability:** Articulate potential bottlenecks and how your solution would scale to millions of products. Considering pre-processing, indexing, and memory usage
 - **Code Quality:** Is the code clean, modular, and well-documented?
 - **Documentation:** Does the README clearly explain setup, assumptions, architecture, and enhancement proposals?
