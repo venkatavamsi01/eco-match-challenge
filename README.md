@@ -91,15 +91,15 @@ input_product,matched_product,carbon_rating
 
 **Test instructions:**
 
-1. Once your system produces `output.csv`, you can evaluate its accuracy against the ground truth provided in `truth.csv` using the included evaluation script:
+1. Once your system produces `output.csv`, you can evaluate its accuracy against the ground truth provided in `ground-truth.csv` using the included evaluation script:
     
     ```bash
-    python evaluate.py --truth truth.csv --pred output.csv
+    cd src
+    python evaluate.py --output output.csv
     ```
     
 2. The script will print metrics such as:
     - **Accuracy score**: percentage of exact matches with the ground truth.
-    - **Average latency**: average time taken to match each product.
 3. Your submission should aim for high accuracy while ensuring average response time is fast.
 
 ---
