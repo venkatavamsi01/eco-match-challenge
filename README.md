@@ -201,7 +201,6 @@ You are free to choose any stack you like, such as:
    Run the following commands depending on your tech stack:
    ```bash
    pip install -r requirements.txt   # if using Python
-   ```
 
 ## 🚀 Setup Instructions
 
@@ -230,12 +229,8 @@ You are free to choose any stack you like, such as:
 
 ## 🌱 Architecture
  A simple matching pipeline might look like this:
-```
 	Input.csv → Input Cleaning → Vectorization/Embedding → Nearest Neighbor Search → Match Selection → Output.csv
-```
-
-```
 
 ---
-
+```
 []()
