@@ -121,6 +121,7 @@ input_product,matched_product,carbon_rating
 2. **Documentation in README.md**:
     - **Setup Instructions**: Detailed steps to install dependencies, configure environment variables, and start the application.
     - **Run Instructions**: Information on accessing the application locally, including URLs.
+    - **Enhancement Proposals**: Include sections on both **Product Improvements** and **Technical Scaling** for future development.
     - **Simple Architecture  Diagram**: Include a simple flow diagram or schematic in your README that illustrates how your system processes inputs and produces outputs.
         - Your diagram should highlight the main processing steps in your pipeline so reviewers can quickly understand your approach.
         - For example:
@@ -129,11 +130,15 @@ input_product,matched_product,carbon_rating
     Input.csv → Input Cleaning → Vectorization / Embedding → Nearest Neighbor Search → Match Selection → Output.csv
     ```
     
+3. **Video (Optional):** 
+    - Include a video recording of your solution if you want to showcase the working demo. You can use tools like loom or just send via the submission email.
+    
 
 Additional Pointers:
 
 1. **Scalability**: In the documentation, include how system behaves when the pool of products are increased from thousands to millions. Such as any delay in response, expensive pre-processing
-2. **Submission Format**: Please share a GitHub repository link to submit your final project. Include any supplementary files or documentation you find useful for reviewers.
+2. **Accuracy**: Include how you've tried to maximise the accuracy. 
+3. **Submission Format**: Please share a GitHub repository link to submit your final project. Include any supplementary files or documentation you find useful for reviewers.
 
 ---
 
