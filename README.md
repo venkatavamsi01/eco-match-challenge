@@ -45,6 +45,13 @@ You will build a system with the following capabilities:
         - `carbon_rating`: carbon rating of the matched product
 4. The response time for matching each product should be fast.
 
+
+Here are some sample receipts containing product names that we have used in this challenge. You’re also welcome to use your own receipts to evaluate your matching system.
+<div style="display: flex; gap: 10px;">
+  <img src="assets/r-1.jpg" alt="receipts" width="200" height="500">
+  <img src="assets/r-4.jpg" alt="receipts" width="200" height="500">
+  <img src="assets/r-3.jpg" alt="receipts" width="200" height="500">
+</div>
 ---
 
 ### Files & Datasets
