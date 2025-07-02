@@ -2,11 +2,11 @@
 
 ### Overview
 
-In this assignment, you will build **EcoMatch**, a product matching system that takes a product name as input and finds the closest match from a pool of food products, along with its carbon rating. The goal is to evaluate your ability to design a performant, scalable matching solution with a well-justified approach.
+In this assignment, you will build **EcoMatch**, a product matching system that takes a product name as input and finds the closest match from a pool of food products, along with its carbon rating. We're interested in seeing how you design a performant, scalable matching solution with a well-justified approach. 
 
 Your solution must:
 
-- Handle unclean product names by cleaning and normalizing inputs.
+- Handle unclean product names by cleaning and normalizing inputs. (+ any other edge cases you can think of) 
 - Accurately match to the closest dataset product.
 - Be well-documented, modular, and scalable.
 
@@ -24,10 +24,11 @@ You will build a system with the following capabilities:
 
 **Technical Stack**:
 
-- You are free to use technical stack of your choice, for example it can be
+- You are free to use the technical stack of your choice, for example, it can be any:
     - ML model
     - AI wrapper
     - Algorithm
+    - Embedders
 
 ---
 
@@ -100,7 +101,7 @@ input_product,matched_product,carbon_rating
     
 2. The script will print metrics such as:
     - **Accuracy score**: percentage of exact matches with the ground truth.
-3. Your submission should aim for high accuracy while ensuring average response time is fast.
+3. Your submission should aim for high accuracy while ensuring a fast average response time.
 
 ---
 
@@ -144,7 +145,7 @@ Please send an email with your GitHub repository and your resume to **rithin.cha
 ### Evaluation Criteria
 
 - **Accuracy:** How closely does the system’s `matched_product` align with the expected matches in `truth.csv`?
-- **Latency:** What is the average time taken to process each product name? Submissions should keep response time fast.
+- **Latency:** What is the average time taken to process each product name? The quicker the better. 
 - **Scalability:** Articulate potential bottlenecks and how your solution would scale to millions of products. Considering pre-processing, indexing, and memory usage
 - **Code Quality:** Is the code clean, modular, and well-documented?
 - **Documentation:** Does the README clearly explain setup, assumptions, architecture, and enhancement proposals?
