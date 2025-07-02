@@ -108,7 +108,7 @@ input_product,matched_product,carbon_rating
 
 ### Considerations
 
-1. **Input Cleaning :** The input names can be unclean with brand names or product quantities. Your system **must** handle noisy product names (e.g., brands, volumes) through text cleaning or normalization before matching.
+1. **Input Cleaning :** The input names can be unclean with brand names or product quantities. Your system **must** handle noisy product names (e.g., brands, volumes) through text cleaning or normalization or enriching with additional metadata before matching.
 
 ---
 
