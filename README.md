@@ -202,8 +202,6 @@ You are free to choose any stack you like, such as:
    ```bash
    pip install -r requirements.txt   # if using Python
 
-## 🚀 Setup Instructions
-
 3. **Download Dataset**  
    - Open the [carbon score dataset](https://docs.google.com/spreadsheets/d/1x2pYXt0ZZ5j8-69CBK8OOWparaPt2r2gR94mRF-9Dg8/edit?usp=sharing) and export it as `dataset.csv`.
    - Place `dataset.csv` in your project directory so your system can read from it during matching.
