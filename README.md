@@ -29,6 +29,7 @@ You will build a system with the following capabilities:
     - AI wrapper
     - Algorithm
     - Embedders
+    - LLMS, RAG, etc.
 
 ---
 
