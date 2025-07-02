@@ -49,12 +49,10 @@ You will build a system with the following capabilities:
 
 ### Files & Datasets
 
-**Carbon score dataset**
+**Files**
 
-https://docs.google.com/spreadsheets/d/1x2pYXt0ZZ5j8-69CBK8OOWparaPt2r2gR94mRF-9Dg8/edit?usp=sharing
-
-- Sheet description
-    
+- `src/data/open-source-ingredients.csv`
+    - Column description
     
     | field | description |
     | --- | --- |
@@ -65,13 +63,13 @@ https://docs.google.com/spreadsheets/d/1x2pYXt0ZZ5j8-69CBK8OOWparaPt2r2gR94mRF-9
     | `lca_farm`, `lca_processing`, `lca_packaging`, `lca_transport`, `lca_retail`, `lca_food_waste` | Life-cycle assessment components in kg CO₂ for each stage |
     | `source` | Source reference for the carbon data |
 
-- test.csv
-- truth.csv
-- evaluate.py
+- `src/data/test.csv`
+    - Contains product names used to test your model's performance.
+- `src/data/ground-truth.csv`
+    - Provides the expected matches for the test products
+- `src/evaluate.py`
+    - A simple script for evaluating the model's performance against the ground truth.
 
----
-
-### How to Test Your System?
 
 **Example test and output files**
 
@@ -90,6 +88,11 @@ input_product,matched_product,carbon_rating
 "Ben & Jerry's Chocolate Fudge Ice Cream 500ml","Ice Cream","C"
 "Organic Whole Milk 2L","Whole Milk","B"
 ```
+
+---
+
+### How to Test Your System?
+
 
 **Test instructions:**
 
