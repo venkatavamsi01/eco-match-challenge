@@ -4,7 +4,7 @@ import csv
 # Read CLI arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('--output', type=str, default='data/output.csv', help='Path to model output CSV')
-parser.add_argument('--truth', type=str, default='data/ground-truth.csv', help='Path to ground truth CSV')
+parser.add_argument('--truth', type=str, default='src/data/ground-truth.csv', help='Path to ground truth CSV')
 args = parser.parse_args()
 
 # Load ground truth

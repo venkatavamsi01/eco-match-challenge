@@ -1,5 +1,13 @@
 pandas>=1.4
 numpy>=1.21
-sentence-transformers>=2.2.2
 scikit-learn>=1.0
-tqdm>=4.64
+sentence-transformers>=2.2.2
+pyarrow>=5.0.0
+
+# Fuzzy matching
+thefuzz[speedup]>=0.19.0
+
+# Optional for spell correction and lemmatization
+pyspellchecker>=0.7.0
+spacy>=3.5.0
+
