@@ -1,8 +1,8 @@
 import os
 import pandas as pd
-from src.core.io import load_ingredients, save_product_index, save_embeddings
-from src.core.cleaning import clean_text
-from src.core.embedding import embed_texts
+from core.io import load_ingredients, save_product_index, save_embeddings
+from core.cleaning import clean_text
+from core.embedding import embed_texts
 
 RAW_DATA_PATH = 'src/data/open-source-ingredients.csv'
 PROCESSED_INDEX_PATH = 'data/processed/product_index.parquet'

@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import time
-from src.core.matching import ProductMatcher
+from core.matching import ProductMatcher
 
 def run_pipeline(input_csv, dataset_csv, output_csv):
     matcher = ProductMatcher(

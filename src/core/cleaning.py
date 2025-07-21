@@ -1,4 +1,3 @@
-# Updated src/core/cleaning.py
 import re
 
 # Domain-specific synonyms & generic prefixes
@@ -16,8 +15,8 @@ QUANTITY_PATTERN = r"\b\d+(?:\.\d+)?\s?(?:ml|l|g|kg|oz)\b"
 def clean_text(text: str) -> str:
     text = text.lower()
     # Apply domain synonyms
-    for k, v in SYNONYMS.items():
-        text = re.sub(rf"\b{k}\b", v, text)
+    #for k, v in SYNONYMS.items():
+        #text = re.sub(rf"\b{k}\b", v, text)
     # Remove quantities and units
     text = re.sub(QUANTITY_PATTERN, "", text)
     # Strip all-caps brand codes or acronyms

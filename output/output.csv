@@ -1,9 +1,9 @@
 input_product,matched_product,carbon_rating
-Cappuc,"Coffee with milk or Cappuccino, powder, instant",4
-MUTTI PEELED TOMS,"Tomato, peeled, canned, drained",1
+Cappuc,"Capon, meat and skin, raw",4
+MUTTI PEELED TOMS,Tomme cheese (PDO) from the French Bauges munntains,3
 PLANT MENU TOFU,"Tofu, plain",1
 NO1 LONGSTOCK MED 6,"Biscuit shortbread, with butter",1
-ASPRGS BNDLE,"Asparagus, white or purple, peeled, raw",1
+ASPRGS BNDLE,"Asparagus, boiled/cooked in water",2
 Iberico Dumpling,Chinese specialty or dumplings,2
 Cappuccino,"Coffee with milk or Cappuccino, powder, instant",4
 JS PARSLEY 30G,"Parsley, fresh",1
@@ -20,7 +20,7 @@ PEA & HAM SOUP,"Soup, split peas, prepacked, to be reheated",1
 San Pellegrino Limonata,"Mineral sparkling water (San Pellegrino), bottled, averagely mineralized",1
 AUBERGINE,"Eggplant, raw",3
 PETIT POTS,"Dauphiné-style creamed potatoes ""au gratin""",1
-JS STRAWBERRIES 250G,"Strawberry in season, raw",1
+JS STRAWBERRIES 250G,"Strawberry, raw",1
 lesco Finest Raw Jumbo King Prawns 165g,"Shrimp, frozen, raw",5
 Coppa,Coppa,5
 Walkers Variety Crisps 6pk,"Salty snacks, made from potato",2
@@ -52,7 +52,7 @@ ICLE CUCUMBER,"Cucumber, pulp, raw",3
 W/T HAM SL 125G,"Cooked ham, choice, rind less and fatless",4
 SWT GEM LETTUCE,"Lettuce, raw",1
 Yeo Valley Greek Style Natural Yoghurt 450g,"Yogurt, Greek-style, plain",2
-JS GREEK FETA,"Feta cheese, from ewe's milk",4
+JS GREEK FETA,Feta-type cheese from cow's milk,3
 JS TENDERSTEM BROC,"Veal, tenderloin, roasted",5
 Apple Fresh,"Apple, pulp and peel, raw",1
 WARB CRUMPETS X6,"Crepe, plain, prepacked, refrigerated",1
@@ -65,7 +65,7 @@ Cheeseburger,"Cheeseburger, from fast foods restaurant",5
 LURPAK BTR S/SALTED,"Anchovy, in salt (semi-preserved)",2
 "Ribeye, Seasonal Vegetables","Spring vegetables, frozen, raw (French beans, carrots, potatoes, green peas, onions)",1
 Guinness Pint,Gin,1
-Sponge Cake Choco,Sponge cake w chocolate w or wo cherry,2
+Sponge Cake Choco,Sponge cake filled and covered with chocolate,5
 Long Grain Rice,"Rice, mix of species (white, wholegrain, wild, red,etc.), raw",2
 Perrier 25cl,"Persimmon, pulp, raw",1
 YOGURT PROTEIN,Frozen yogurt,2
@@ -80,7 +80,7 @@ Cucumber and Mustard Seed Pickles,Mustard,1
 JS CREME FRAICHE,"Soy ""cream"" preparation",1
 PORT SALUT,"Salami, pure pork",3
 KSHAW Chicken Shawarma,"Sandwich made with French bread, chicken, raw vegetables (lettuce & tomato) and mayonnaise",2
-One Water Sportscap 750ml,"Mineral still water (Aix-les-Bains), bottled, lightly mineralized",1
+One Water Sportscap 750ml,"Mineral still water (Caramulo), bottled, very lightly mineralized",1
 KRONENBOURG,"Kumquat, without pips, raw",1
 BOLD QUEEN CHICKPEAS,"Chick pea, dried",1
 E PEPPER,"Chili pepper, raw",3
@@ -88,7 +88,7 @@ LITTLE GEM LETT,"Iceberg lettuce, raw",1
 Tesco Finest Red Grapes Seedless 500g (c),"Grape, red, raw",1
 JS S/SKIM MLK 0.568L,"Milkshake, from fast foods restaurant",1
 WR CI GARLIC,"Garlic, fresh",1
-Aqua Libra Sparkling water,"Mineral sparkling water (Ste-Marguerite), bottled, averagely mineralized",1
+Aqua Libra Sparkling water,"Mineral sparkling water (Hydroxydase), bottled, strongly mineralized",1
 Triple Pepperoni,"Sauce, pepper, prepacked",2
 COCA COLA,"Cola, with sugar",1
 BRD BRST ST X4,"Brie de Meaux cheese, from cow's milk",3
