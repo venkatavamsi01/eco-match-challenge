@@ -1,86 +1,125 @@
-## 💡 EcoMatch - Product Matching System
 
-### Overview
+# 🌱 EcoMatch - Intelligent Product-to-Carbon Matching
 
-In this assignment, you will build **EcoMatch**, a product matching system that takes a product name as input and finds the closest match from a pool of food products, along with its carbon rating. We're interested in seeing how you design a performant, scalable matching solution with a well-justified approach. 
-
-Your solution must:
-
-- Handle unclean product names by cleaning and normalizing inputs. (+ any other edge cases you can think of) 
-- Accurately match to the closest dataset product.
-- Be well-documented, modular, and scalable.
+EcoMatch is a semantic product matching system designed to map noisy product descriptions (e.g. from receipts) to structured ingredient data and return their carbon impact rating.
 
 ---
 
-### Challenge Brief
+## 🚀 Pipeline Overview
 
-You will build a system with the following capabilities:
+### 1. **Preprocessing (One-time Setup)**
 
-- **I/O:**
-    - Accept an `input.csv` file containing a list of product names to match.
-    - Produce an `output.csv` file with the matching results.
-- **Dataset Flexibility:**
-    - Design your system so that the dataset of known products can be **easily replaced or extended**, for example by swapping the CSV or spreadsheet file, **without requiring major code changes**
+This step cleans, embeds, and indexes the ingredient reference dataset.
 
-**Technical Stack**:
+- Cleans product names using regex-based normalization
+- Generates semantic embeddings using Sentence-BERT
+- Saves:
+  - `product_index.parquet`: Cleaned product dataset
+  - `product_embeddings.npy`: NumPy array of embedding vectors
+  - `faiss_index.bin`: Precomputed FAISS index for fast similarity search
 
-- You are free to use the technical stack of your choice, for example, it can be any:
-    - ML model
-    - AI wrapper
-    - Algorithm
-    - Enrichers & Embedders
-    - LLMS, RAG, etc.
+Run:
+
+```bash
+python preprocess.py
+```
 
 ---
 
-### User Story
+### 2. **Matching Pipeline (For New Inputs)**
 
-1. In a real-world scenario, an external service would query the system by sending a product name through an API call.
-2. The system would identify the closest match for the given product from the pool of products in the dataset and respond with the matched product and its carbon rating.
-3. **For this assignment**, instead of implementing an API, the system should simulate API calls by:
-    1. Accepting an `input.csv` file containing a list of product names to match.
-    2. Producing an `output.csv` file containing:
-        - `input_product`: original product name from the input
-        - `matched_product`: closest matched product name from the dataset
-        - `carbon_rating`: carbon rating of the matched product
-4. The response time for matching each product should be fast.
+This runs the matching process for a given input list (`test.csv`) and produces `output.csv`.
 
+For each product:
+- Cleans the name
+- Embeds the input using Sentence-BERT
+- Searches top-K similar products using FAISS
+- Re-ranks with a fuzzy-semantic scoring blend:  
+  `score = α × semantic + (1 - α) × fuzzy_ratio`
+- Returns: `input_product`, `matched_product`, `carbon_rating`
 
-Here are some sample receipts containing product names that we have used in this challenge. You’re also welcome to use your own receipts to evaluate your matching system.
-<div style="display: flex; gap: 10px;">
-  <img src="assets/r-1.jpg" alt="receipts" width="200" height="500">
-  <img src="assets/r-4.jpg" alt="receipts" width="200" height="500">
-  <img src="assets/r-3.jpg" alt="receipts" width="200" height="500">
-</div>
+Run:
+
+```bash
+python run.py
+```
+
+The script logs:
+- Matcher load time
+- Input read time
+- Per-product match latency
+- Output write time
+- Total runtime
+
 ---
 
-### Files & Datasets
+### 3. **Evaluation**
 
-**Files**
+To check how accurate the matches are:
 
-- `src/data/open-source-ingredients.csv`
-    - Column description
-    
-    | field | description |
-    | --- | --- |
-    | `name` | Original product name in the dataset |
-    | `clean_name` | Preprocessed and cleaned version of `name`  |
-    | `carbon_rating` | Carbon impact rating (e.g., A/B/C/D)C |
-    | `co2e` | Estimated CO₂ emissions in kg per kg/litre |
-    | `lca_farm`, `lca_processing`, `lca_packaging`, `lca_transport`, `lca_retail`, `lca_food_waste` | Life-cycle assessment components in kg CO₂ for each stage |
-    | `source` | Source reference for the carbon data |
+```bash
+python evaluate.py --output output/output.csv --truth src/data/ground-truth.csv
+```
 
-- `src/data/test.csv`
-    - Contains product names used to test your model's performance.
-- `src/data/ground-truth.csv`
-    - Provides the expected matches for the test products
-- `src/evaluate.py`
-    - A simple script for evaluating the model's performance against the ground truth.
+Returns overall accuracy of carbon rating matching.
 
+---
 
-**Example test and output files**
+## 📁 Directory Structure
 
-test.csv
+```
+eco-match-challenge/
+├── src/
+│   ├── run.py                 # Main match runner
+│   ├── preprocess.py          # Preprocessing + index builder
+│   ├── evaluate.py            # Evaluation script
+│   ├── core/
+│   │   ├── matching.py        # FAISS + fuzzy matching logic
+│   │   ├── pipeline.py        # Pipeline orchestrator
+│   │   ├── embedding.py       # Sentence-BERT embedder
+│   │   ├── cleaning.py        # Regex-based cleaner
+│   │   ├── io.py              # Parquet/NPY file utils
+│   └── data/
+│       ├── open-source-ingredients.csv
+│       ├── test.csv
+│       └── ground-truth.csv
+├── data/processed/
+│   ├── product_index.parquet
+│   ├── product_embeddings.npy
+│   └── faiss_index.bin
+└── output/
+    └── output.csv
+```
+
+---
+
+## 📦 Requirements
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Required:
+- `sentence-transformers`
+- `faiss-cpu`
+- `thefuzz[speedup]`
+- `numpy`, `pandas`, `pyarrow`
+
+---
+
+## 🧠 Key Concepts
+
+- **FAISS**: High-speed vector similarity search over embeddings
+- **Sentence-BERT**: Converts names into semantic embeddings
+- **Fuzzy Re-ranking**: Improves robustness to text noise (e.g., brand names, order)
+
+---
+
+## 🔍 Example Input → Output
+
+### Input (test.csv):
 
 ```
 product_name
@@ -88,147 +127,35 @@ product_name
 "Organic Whole Milk 2L"
 ```
 
-output.csv
+### Output (output.csv):
 
 ```
 input_product,matched_product,carbon_rating
-"Ben & Jerry's Chocolate Fudge Ice Cream 500ml","Ice Cream","C"
-"Organic Whole Milk 2L","Whole Milk","B"
+"Ben & Jerry's...",Ice Cream,C
+"Organic Whole Milk...",Whole Milk,B
 ```
 
 ---
 
-### How to Test Your System?
+## 📈 Performance Notes
 
-
-**Test instructions:**
-
-1. Once your system produces `output.csv`, you can evaluate its accuracy against the ground truth provided in `ground-truth.csv` using the included evaluation script:
-    
-    ```bash
-    cd src
-    python evaluate.py --output output.csv
-    ```
-    
-2. The script will print metrics such as:
-    - **Accuracy score**: percentage of exact matches with the ground truth.
-3. Your submission should aim for high accuracy while ensuring a fast average response time.
+- FAISS is pre-indexed → no recomputation at runtime
+- Pipeline prints timing stats per step
+- Average match latency ~70–100ms on CPU
 
 ---
 
-### Considerations
+## 🛠️ Enhancement Ideas
 
-1. **Input Cleaning :** The input names can be unclean with brand names or product quantities. Your system **must** handle noisy product names (e.g., brands, volumes) through text cleaning or normalization or enriching with additional metadata before matching.
-
----
-
-### Submission Guidelines
-
-1. **GitHub Repository**:
-    - Create a GitHub repository named `eco-match-challenge`.
-    - Commit all source code, and documentation to this repository.
-    - A `README.md` file with instructions mentioned below
-2. **Documentation in README.md**:
-    - **Setup Instructions**: Detailed steps to install dependencies, configure environment variables, and start the application.
-    - **Run Instructions**: Information on accessing the application locally, including URLs.
-    - **Enhancement Proposals**: Include sections on both **Product Improvements** and **Technical Scaling** for future development.
-    - **Simple Architecture  Diagram**: Include a simple flow diagram or schematic in your README that illustrates how your system processes inputs and produces outputs.
-        - Your diagram should highlight the main processing steps in your pipeline so reviewers can quickly understand your approach.
-        - For example:
-    
-    ```
-    Input.csv → Input Cleaning → Vectorization / Embedding → Nearest Neighbor Search → Match Selection → Output.csv
-    ```
-    
-3. **Video (Optional):** 
-    - Include a video recording of your solution if you want to showcase the working demo. You can use tools like loom or just send via the submission email.
-    
-
-Additional Pointers:
-
-1. **Scalability**: In the documentation, include how system behaves when the pool of products are increased from thousands to millions. Such as any delay in response, expensive pre-processing
-2. **Accuracy**: Include how you've tried to maximise the accuracy. 
-3. **Submission Format**: Please share a GitHub repository link to submit your final project. Include any supplementary files or documentation you find useful for reviewers.
+- Persist fuzzy scores + visualize match candidates
+- Switch to GPU FAISS (`faiss-gpu`)
+- Add REST API with FastAPI/Flask for real-time querying
+- Plug in OCR layer from receipt image
 
 ---
 
-**Questions**: For questions about the challenge, role, or Reewild, reach out anytime.
+## 👤 Author
 
-Please send an email with your GitHub repository and your resume to **rithin.chalumuri@reewild.com**. Looking forward to seeing the hack —have fun with it! 🌱
-
----
-
-### Evaluation Criteria
-
-- **Accuracy:** How closely does the system’s `matched_product` align with the expected matches in `truth.csv`?
-- **Latency:** What is the average time taken to process each product name? The quicker the better. 
-- **Scalability:** Articulate potential bottlenecks and how your solution would scale to millions of products. Considering pre-processing, indexing, and memory usage
-- **Code Quality:** Is the code clean, modular, and well-documented?
-- **Documentation:** Does the README clearly explain setup, assumptions, architecture, and enhancement proposals?
+Built as part of the EcoMatch challenge for sustainable computing.
 
 ---
-
-### Suggested GitHub README.md Structure
-
-Please add and remove sections you think are appropriate. This is just a rough example. 
-
-```jsx
-
-# 🍃 EcoMatch - Product Matching System
-
-## 📜 Overview
-**EcoMatch** is a product matching system designed to help users understand the environmental impact of the food products they consume. By providing a product name, the system identifies the closest matching product from a dataset and outputs its carbon rating. This project demonstrates your ability to design an efficient, low-latency matching pipeline, while considering trade-offs and scalability.
-
----
-
-## 🔧 Tech Stack
-You are free to choose any stack you like, such as:
-- **ML/AI**: Pre-trained embeddings (e.g., Sentence-BERT), vector search libraries (e.g., FAISS, Annoy)
-- **Programming Language**: Python, Node.js, or others
-- **Data Handling**: Pandas, SQL, or in-memory dictionaries
-- **Optional**: FastAPI or Flask for API integration (if you wish to extend)
-
----
-
-## 🚀 Setup Instructions
-
-1. **Clone the Repository**  
-   ```bash
-   git clone https://github.com/your-username/eco-match-challenge.git
-   cd eco-match-challenge
-	```
-2. **Install Dependencies**  
-   Run the following commands depending on your tech stack:
-   ```bash
-   pip install -r requirements.txt   # if using Python
-
-3. **Download Dataset**  
-   - Open the [carbon score dataset](https://docs.google.com/spreadsheets/d/1x2pYXt0ZZ5j8-69CBK8OOWparaPt2r2gR94mRF-9Dg8/edit?usp=sharing) and export it as `dataset.csv`.
-   - Place `dataset.csv` in your project directory so your system can read from it during matching.
-
-4. **Run the Application**
-   Run your matching system by specifying the input CSV (products to match), the dataset, and the desired output file:
-   ```bash
-   python run_matching.py --input test.csv --output output.csv --dataset dataset.csv
-	```
-5. **Testing & Evaluation**  
-   After generating your `output.csv`, evaluate your system’s accuracy and performance against the ground truth:
-   ```bash
-   python evaluate.py --truth truth.csv --pred output.csv
-	```
----
-
-## 📁 File Descriptions
-- dataset.csv: Contains product pool with carbon scores and detailed LCA breakdowns.
-- test.csv: List of input product names to match.
-- truth.csv: Ground truth for evaluation.
-- evaluate.py: Script to calculate accuracy and latency.
-- run_matching.py: Your matching system entry point.
-
-## 🌱 Architecture
- A simple matching pipeline might look like this:
-	Input.csv → Input Cleaning → Vectorization/Embedding → Nearest Neighbor Search → Match Selection → Output.csv
-
----
-```
-[]()
