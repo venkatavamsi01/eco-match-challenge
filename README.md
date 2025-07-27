@@ -58,7 +58,7 @@ The script logs:
 To check how accurate the matches are:
 
 ```bash
-python evaluate.py --output output/output.csv --truth src/data/ground-truth.csv
+python evaluate.py
 ```
 
 Returns overall accuracy of carbon rating matching.
@@ -141,21 +141,18 @@ input_product,matched_product,carbon_rating
 
 - FAISS is pre-indexed → no recomputation at runtime
 - Pipeline prints timing stats per step
-- Average match latency ~70–100ms on CPU
+- Average match latency ~11-16ms on CPU
 
 ---
 
 ## 🛠️ Enhancement Ideas
 
-- Persist fuzzy scores + visualize match candidates
+- Add domain-aware synonym based token replacements logic during cleaning
+- Going with VectoDB(chromaDB,Qdrant)instead of Numpy embedding storage while still using FAISS as backend
+- Smart Index Refresh(automating--- tracking changes in open-source-ingredients.csv → appending new rows(clean→embed→vectors) avoiding full recomputes
+- Add caching layers such as Embedder Cache (to avoid redundant Sentence-BERT encoding) and FAISS Search Result Cache (to skip repeated top-K lookups for similar queries)
 - Switch to GPU FAISS (`faiss-gpu`)
 - Add REST API with FastAPI/Flask for real-time querying
 - Plug in OCR layer from receipt image
-
----
-
-## 👤 Author
-
-Built as part of the EcoMatch challenge for sustainable computing.
 
 ---
